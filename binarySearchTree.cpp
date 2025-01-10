@@ -80,7 +80,7 @@ class BinarySearchTree{
                     delete node;
                     return tempNode;
                 }
-                else if(node -> right = nullptr){
+                else if(node -> right == nullptr){
                     TreeNode* tempNode = node -> left;
                     delete node;
                     return tempNode;
