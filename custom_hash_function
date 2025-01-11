@@ -1,0 +1,31 @@
+#include <iostream>
+#include <functional>
+#include <unordered_map>
+
+class Point {
+public:
+    int x, y;
+
+    Point(int x, int y) : x(x), y(y) {}
+
+    // Overriding the equivalence operator
+    bool operator==(const Point& other) const {
+        return x == other.x && y == other.y;
+    }
+};
+
+namespace std {
+    template <>
+    struct hash<Point> {
+        size_t operator()(const Point& p) const {
+            return std::hash<int>()(p.x) ^ std::hash<int>()(p.y);
+        }
+    };
+}
+
+int main() {
+    std::unordered_map<Point, int> points;
+    points[Point(1, 2)] = 5;
+    std::cout << "Value at (1,2): " << points[Point(1, 2)] << std::endl;
+    return 0;
+}
